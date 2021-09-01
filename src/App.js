@@ -5,6 +5,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Home from "./components/Home";
 import TopNavbar from "./components/layouts/Navbar";
+import NotFoundPage from "./components/NotFoundPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,14 +20,20 @@ function App() {
     <>
       <Router>
         <TopNavbar />
-        {isLoggedIn ? (
+        {!isLoggedIn ? (
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route path="*">
+              <NotFoundPage />
+            </Route>
           </Switch>
         ) : (
           <Switch>
-            <Route exact path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
+            <Route path="*">
+              <NotFoundPage />
+            </Route>
           </Switch>
         )}
       </Router>
